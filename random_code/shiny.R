@@ -3,15 +3,6 @@ library(jsonlite)
 library(dplyr)
 library(ggplot2)
 
-
-
-facets = list(
-  "Category PM25",
-  "value_pm5"
-)
-
-
-
 ui <- navbarPage("My Application",
                  tabPanel("Component 1",
                           # tableOutput("df"),
@@ -23,12 +14,12 @@ ui <- navbarPage("My Application",
 )
 
 server <- function(input, output){
-  facets = list(
-    "Category PM25",
+  facets = c(
+    "country",
     "value_pm5"
   )
   
-  all_data = get_all_country_data(facets)
+  all_responses = get_all_country_data()
   
   mean_table = all_data %>%
     group_by(country) %>%
@@ -53,7 +44,7 @@ shinyApp(ui = ui, server = server)
 # takes parameter:
 # country: string
 # facets: list that contains facets that you want
-get_country_data <- function(country, facets){
+get_country_data <- function(country, facets=c()){
   response = fromJSON(get_req_url(get_req_part(facets,"facet"), get_req_query("refine.country", country), get_req_query("rows", "10000")))
   return(response)
 }
@@ -61,26 +52,21 @@ get_country_data <- function(country, facets){
 # returns observations of countries:
 # Turkey,Greece,Italy,Sweden
 # as a dataframe
-get_all_country_data = function(facets){
+get_all_country_data = function(facets=c()){
   countries = list(
     "Turkey",
     "Italy",
     "Greece",
     "Sweden"
   )
-  d = NA
-  counter = 1
+  responses = list()
   for (country in countries) {
     cat(country, "request sent..." , sep = " ", "\n")
     res = fromJSON(get_req_url(get_req_part(facets,"facet"), get_req_query("refine.country", country), get_req_query("rows", "10000")))
-    if(counter==1)
-      d = get_only_faced_data(res,facets) 
-    else
-      d = rbind(d, get_only_faced_data(res,facets))
-    counter = counter + 1
+    responses[[country]]=get_only_faced_data(res,facets) 
     cat(country, "responded!" , sep = " ", "\n")
   }
-  return(d)
+  return(responses)
 }
 
 # returns &key=value
@@ -107,8 +93,31 @@ get_req_url = function(...){
 
 # returns faced columns from the data
 get_only_faced_data <- function(response,facet_vector){
-  return(response$records$fields[facet_vector])
+  return(response$records$fields[,facet_vector])
 }
+
+get_facets_df=function(res_list,facet=c()){
+  d=NA
+  counter=1
+  for (res in res_list) {
+    if(counter==1)
+      d=get_only_faced_data(res,facet) 
+    else
+      d=rbind(d,get_only_faced_data(res))
+    counter=counter+1
+  }
+  return(d)
+  
+}
+
+
+
+
+
+
+
+
+
 
 facet_vector<-c(
   "country",
@@ -117,6 +126,8 @@ facet_vector<-c(
   "Category PM25",
   "data_location_latitude",
   "data_location_longitude")
+
+
 
 
 
