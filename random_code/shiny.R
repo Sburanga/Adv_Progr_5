@@ -14,7 +14,7 @@ facets = list(
 
 ui <- navbarPage("My Application",
                  tabPanel("Component 1",
-                          tableOutput("df"),
+                          # tableOutput("df"),
                           plotOutput("plot_1")),
                  tabPanel("Component 2",
                           textOutput("function_2")),
@@ -27,14 +27,22 @@ server <- function(input, output){
     "Category PM25",
     "value_pm5"
   )
+  
   all_data = get_all_country_data(facets)
+  
   mean_table = all_data %>%
     group_by(country) %>%
     summarise(mean=mean(value_pm5))
-  output$df = renderTable(mean_table)
-  output$plot_1 = renderPlot(ggplot() +
-                               geom_histogram(aes(x=mean_table$mean))
-                             ) 
+  
+  # output$df = renderTable(mean_table)
+  
+  output$plot_1 = renderPlot({
+    g = ggplot(mean_table, aes(x=country, y=mean)) +
+      geom_bar(position="dodge", stat="identity") +
+      labs(title = "Means of P5 in Countries", x="Countries", y="Mean") +
+      scale_y_continuous(breaks=seq(0,70,by=5))
+    g
+  })
   output$function_2 = renderText("This is 2st!")
   output$function_3 = renderText("This is 3st!")
 }
