@@ -19,8 +19,8 @@ server <- function(input, output){
     "value_pm5"
   )
   
-  all_responses = get_all_country_data()
-  
+  all_responses = get_all_country_responses()
+  all_data = get_facets_all_responses(all_responses, facets)
   mean_table = all_data %>%
     group_by(country) %>%
     summarise(mean=mean(value_pm5))
@@ -52,7 +52,7 @@ get_country_data <- function(country, facets=c()){
 # returns observations of countries:
 # Turkey,Greece,Italy,Sweden
 # as a dataframe
-get_all_country_data = function(facets=c()){
+get_all_country_responses = function(){
   countries = list(
     "Turkey",
     "Italy",
@@ -62,8 +62,8 @@ get_all_country_data = function(facets=c()){
   responses = list()
   for (country in countries) {
     cat(country, "request sent..." , sep = " ", "\n")
-    res = fromJSON(get_req_url(get_req_part(facets,"facet"), get_req_query("refine.country", country), get_req_query("rows", "10000")))
-    responses[[country]]=get_only_faced_data(res,facets) 
+    res = fromJSON(get_req_url(get_req_query("refine.country", country), get_req_query("rows", "10000")))
+    responses[[country]]=res
     cat(country, "responded!" , sep = " ", "\n")
   }
   return(responses)
@@ -93,32 +93,36 @@ get_req_url = function(...){
 
 # returns faced columns from the data
 get_only_faced_data <- function(response,facet_vector){
+  if(length(facet_vector)==0)
+    stop("facet_vector cannot be empty!!!")
   return(response$records$fields[,facet_vector])
 }
 
-get_facets_df=function(res_list,facet=c()){
+get_facets_all_responses = function(res_list, facet_vector){
+  if(length(facet_vector)==0)
+    stop("facet_vector cannot be empty!!!")
   d=NA
   counter=1
   for (res in res_list) {
     if(counter==1)
-      d=get_only_faced_data(res,facet) 
+      d=get_only_faced_data(res, facet_vector) 
     else
-      d=rbind(d,get_only_faced_data(res))
+      d=rbind(d, get_only_faced_data(res, facet_vector))
     counter=counter+1
   }
   return(d)
-  
 }
 
 
 
 
+## for func 1
+my_facet = c(
+  "country",
+  "value_pm5"
+)
 
-
-
-
-
-
+## for func 3
 facet_vector<-c(
   "country",
   "filename",
@@ -126,12 +130,6 @@ facet_vector<-c(
   "Category PM25",
   "data_location_latitude",
   "data_location_longitude")
-
-
-
-
-
-
 
 
 
