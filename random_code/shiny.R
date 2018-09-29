@@ -74,9 +74,9 @@ get_all_country_data = function(facets){
     cat(country, "request sent..." , sep = " ", "\n")
     res = fromJSON(get_req_url(get_req_part(facets,"facet"), get_req_query("refine.country", country), get_req_query("rows", "10000")))
     if(counter==1)
-      d = get_only_faced_data(res) 
+      d = get_only_faced_data(res,facets) 
     else
-      d = rbind(d, get_only_faced_data(res))
+      d = rbind(d, get_only_faced_data(res,facets))
     counter = counter + 1
     cat(country, "responded!" , sep = " ", "\n")
   }
@@ -106,8 +106,21 @@ get_req_url = function(...){
 
 
 # returns faced columns from the data
-get_only_faced_data <- function(response){
-  return(response$records$fields[response$facet_groups$name])
+get_only_faced_data <- function(response,facet_vector){
+  return(response$records$fields[facet_vector])
 }
+
+facet_vector<-c(
+  "country",
+  "filename",
+  "value_pm5",
+  "Category PM25",
+  "data_location_latitude",
+  "data_location_longitude")
+
+
+
+
+
 
 
