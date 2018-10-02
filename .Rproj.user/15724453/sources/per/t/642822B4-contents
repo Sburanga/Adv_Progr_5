@@ -10,6 +10,8 @@ Worldwide_Pollution =
     ),
     methods = list(
       initialize = function(country_list){
+        if(is.character(country_list)==TRUE)
+          stop("asdasd")
         supported_countries = list(
           "Turkey",
           "Italy",
@@ -18,8 +20,7 @@ Worldwide_Pollution =
         )
         if(length(country_list)==0)
           stop("country_list parameter cannot be empty!")
-        if(length(setdiff(country_list,supported_countries)) != 0 || length(setdiff(supported_countries,country_list)) != 0 )
-          stop("This application only supports these countries: {'Sweden','Italy','Greece','Turkey'}")
+       
         
         countries <<- country_list
         root_url <<- "https://public.opendatasoft.com/api/records/1.0/search/?dataset=worldwide-pollution"
@@ -82,6 +83,8 @@ Worldwide_Pollution =
       get_facets_all_responses = function(facet_vector){
         if(length(facet_vector)==0)
           stop("facet_vector cannot be empty!!!")
+        #if(!is.list(facet_vector) || !is.character(facet_vector))
+          stop("facet_vector should be list!!!")
         d=NA
         counter=1
         for (res in responses) {

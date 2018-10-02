@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538482578940.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3220555799",
+    "id" : "B1C27123",
+    "lastKnownWriteTime" : 1538492663,
+    "last_content_update" : 1538492663465,
+    "path" : "D:/download-D/Statistics and Machine Learning/Advanced R programming/assignment/Adv_Progr_5/tests/testthat/test_Worldwide_Population.R",
+    "project_path" : "tests/testthat/test_Worldwide_Population.R",
+    "properties" : {
+        "cursorPosition" : "20,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

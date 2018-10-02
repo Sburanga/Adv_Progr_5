@@ -1,7 +1,6 @@
 library(shiny)
 library(dplyr)
 library(ggplot2)
-source("Worldwide_Population.R")
 My_shiny<-
   setRefClass(
   "My_shiny",
@@ -31,7 +30,7 @@ My_shiny<-
           "Greece",
           "Sweden"
         )
-        api=Worldwide_Pollution$new(countries)
+        api=My_Shiny::Worldwide_Polution$new(countries)
         
         output$plot_1 = renderPlot({
           plot_pm25_means(api$get_facets_all_responses(facets)) 
@@ -56,4 +55,5 @@ My_shiny<-
       
   )
 )
+
     

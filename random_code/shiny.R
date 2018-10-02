@@ -38,7 +38,7 @@ server <- function(input, output){
   output$function_3 = renderText("This is 3st!")
 }
 
-shinyApp(ui = ui, server = server)
+
 
 
 # takes parameter:
@@ -131,5 +131,5 @@ facet_vector<-c(
   "data_location_latitude",
   "data_location_longitude")
 
-
+shinyApp(ui = ui, server = server)
 
