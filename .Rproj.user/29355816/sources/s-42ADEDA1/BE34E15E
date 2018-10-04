@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538678099446.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "BE34E15E",
+    "lastKnownWriteTime" : 1538678119,
+    "last_content_update" : 1538678119,
+    "path" : "~/Development/R Projects/Liu/AdvR/Adv_Progr_5/R/my_sunshiny.R",
+    "project_path" : "R/my_sunshiny.R",
+    "properties" : {
+        "cursorPosition" : "0,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
