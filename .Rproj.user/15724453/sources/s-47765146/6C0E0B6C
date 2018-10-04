@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538677352144.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "6C0E0B6C",
+    "lastKnownWriteTime" : 1538680014,
+    "last_content_update" : 1538680454434,
+    "path" : "D:/download-D/Statistics and Machine Learning/Advanced R programming/assignment/Adv_Progr_5/vignettes/my-vignette.Rmd",
+    "project_path" : "vignettes/my-vignette.Rmd",
+    "properties" : {
+        "cursorPosition" : "22,0",
+        "last_setup_crc32" : "477651469990457b",
+        "scrollLine" : "13"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
