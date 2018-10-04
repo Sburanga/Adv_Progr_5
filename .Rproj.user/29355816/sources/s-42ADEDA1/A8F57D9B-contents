@@ -1,0 +1,95 @@
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(sf)
+library(shiny)
+
+df_householders = read.csv("income_household.csv", fileEncoding="ISO-8859-1", sep=",")
+df_municipalities = read.csv("income_municipality.csv", fileEncoding="ISO-8859-1", sep=",")
+
+rds = readRDS("gadm36_SWE_2_sf.rds")
+
+df_householders = df_householders %>%
+  group_by(region) %>%
+  summarise(Young = mean(X2016[age=="18-29 years"]))
+
+df_municipalities = df_municipalities %>%
+  group_by(region) %>%
+  summarise(Young = mean(X2016[age=="18-29 years"]))
+
+###------###
+# Set rownames of df_householders as like rds NAME_1 countie names to use same indexing
+# split all regions
+df_householders = as.data.frame(df_householders)
+splitted_region = strsplit(as.character(df_householders$region) , " ")
+# get all words except first and last
+splitted_region = sapply(splitted_region, FUN=function(el){
+  paste(el[2:(length(el)-1)], collapse=" ")
+})
+# fix the Orebro label
+splitted_region[which(splitted_region=="Örebro")]="Orebro"
+# set rownames
+rownames(df_householders) = splitted_region
+# Set Young means to rds
+rds$young_income=df_householders[rds$NAME_1, "Young"]
+rds$young_income[is.na(rds$young_income)]=0
+
+###------###
+# split all regions
+df_municipalities = as.data.frame(df_municipalities)
+splitted_region = strsplit(as.character(df_municipalities$region) , " ")
+# get all words except first and last
+splitted_region = sapply(splitted_region, FUN=function(el){
+  paste(el[2:(length(el))], collapse=" ")
+})
+# Fix uppslands-vasby
+splitted_region[which(splitted_region=="Upplands Väsby")]="Upplands-Väsby"
+# set rownames
+rownames(df_municipalities) = splitted_region
+# Set Young means to rds
+rds$young_municipalities = df_municipalities[rds$NAME_2, "Young"]
+rds$young_municipalities[is.na(rds$young_municipalities)] = 0
+
+
+
+### SHINY PART
+ui <- fluidPage(
+  mainPanel(plotlyOutput("plot1"),
+            plotlyOutput("plot2"),
+            verbatimTextOutput("info"))
+)
+
+county_names = unique(rds$NAME_1)
+
+server <- function(input, output) {
+  output$plot1 <- renderPlotly({
+    choropleth_map_1 = plot_ly() %>%
+      add_sf(data=rds, split=~NAME_1, color=~young_income, showlegend=F, alpha=1) %>%
+      layout(
+        title = "Mean of Young in Sweden"
+      )
+    choropleth_map_1
+  })
+  output$plot2 <- renderPlotly({
+    s <- event_data("plotly_click")
+    if(length(s)){
+      sub_rds = rds[which(rds$NAME_1==as.character(county_names[as.integer(s)+1])),]
+      choropleth_map_2 = plot_ly() %>%
+        add_sf(data=sub_rds, split=~NAME_2, color=~young_municipalities, showlegend=F, alpha=1) %>%
+        layout(
+          title = paste("Mean of Young in", county_names[as.integer(s)+1])
+        )
+      choropleth_map_2
+    }
+  })
+  output$info <- renderText({
+    s <- event_data("plotly_click")
+    if (length(s) == 0) {
+      "Click on a cell in the heatmap to display a scatterplot"
+    } else {
+      cat(as.character(s), "-" , as.character(county_names[as.integer(s)+1]))
+    }
+  })
+}
+
+shinyApp(ui, server)
