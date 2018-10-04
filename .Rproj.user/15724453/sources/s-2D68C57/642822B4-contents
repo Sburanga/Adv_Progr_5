@@ -1,6 +1,13 @@
 library(jsonlite)
 
-Worldwide_Pollution = 
+#' Title Worldwide_Pollution
+#'
+#' @field responses list. The list of responses comming from API 
+#' @field root_url character. The base url of the API
+#' @field countries list. A list of the user's input
+#' @description This class creates one object which can give access in an API.The user can choose between four countries(Greece,Italy,Sweden,Turkey),
+#' and manipulate data for air pollution such as value pm5.
+Worldwide_Pollution =   
   setRefClass(
     "Worldwide_Pollution",
     fields = list(
@@ -18,6 +25,8 @@ Worldwide_Pollution =
           "Greece",
           "Sweden"
         )
+        if(any(!(country_list %in% supported_countries)))
+          stop("No correct input")
         if(length(country_list)==0)
           stop("country_list parameter cannot be empty!")
        

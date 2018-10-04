@@ -1,8 +1,13 @@
 library(shiny)
 library(dplyr)
 library(ggplot2)
+#' Title my_sunshine
+#'
+#' @field server_components list. It contains ui and server for the Shiny application.
+#' @description This class uses another class in order to have access in an API.
+#' It is also create a Shiny application for air pollution. 
 My_shiny<-
-  setRefClass(
+   setRefClass(
   "My_shiny",
    fields = list(
    server_components="list"
