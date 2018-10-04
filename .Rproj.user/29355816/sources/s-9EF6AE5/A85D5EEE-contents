@@ -92,8 +92,8 @@ Worldwide_Pollution =
       get_facets_all_responses = function(facet_vector){
         if(length(facet_vector)==0)
           stop("facet_vector cannot be empty!!!")
-        if(!is.list(facet_vector))
-          stop("facet_vector should be list!!!")
+        if(!is.list(facet_vector) || !is.character(facet_vector))
+          stop("facet_vector should be character vector!!!")
         d=NA
         counter=1
         for (res in responses) {
