@@ -9,6 +9,5 @@ License: MIT+ file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
-Imports: ggplot2,Jsonlite,shiny,dplyr
-Suggests: knitr,rmarkdown,testthat
+Suggests: knitr,rmarkdown,testthat,ggplot2,jsonlite,shiny,dplyr
 VignetteBuilder: knitr
