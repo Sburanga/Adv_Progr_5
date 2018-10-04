@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538685249767.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "415471919",
+    "id" : "37285528",
+    "lastKnownWriteTime" : 1538682411,
+    "last_content_update" : 1538682411,
+    "path" : "~/Development/R Projects/Liu/AdvR/Adv_Progr_5/tests/testthat/test_Worldwide_Population.R",
+    "project_path" : "tests/testthat/test_Worldwide_Population.R",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
