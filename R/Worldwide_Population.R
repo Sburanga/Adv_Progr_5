@@ -1,5 +1,3 @@
-library(jsonlite)
-
 #' Title Worldwide_Pollution
 #'
 #' @field responses list. The list of responses comming from API 
@@ -7,6 +5,7 @@ library(jsonlite)
 #' @field countries list. A list of the user's input
 #' @description This class creates one object which can give access in an API.The user can choose between four countries(Greece,Italy,Sweden,Turkey),
 #' and manipulate data for air pollution such as value pm5.
+#' @import jsonlite
 Worldwide_Pollution =   
   setRefClass(
     "Worldwide_Pollution",
@@ -92,7 +91,7 @@ Worldwide_Pollution =
       get_facets_all_responses = function(facet_vector){
         if(length(facet_vector)==0)
           stop("facet_vector cannot be empty!!!")
-        if(!is.list(facet_vector) || !is.character(facet_vector))
+        if(!(is.vector(facet_vector) && is.character(facet_vector)))
           stop("facet_vector should be character vector!!!")
         d=NA
         counter=1
