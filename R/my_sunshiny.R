@@ -1,11 +1,9 @@
-library(shiny)
 library(dplyr)
 #' Title my_sunshine
 #'
 #' @field server_components list. It contains ui and server for the Shiny application.
 #' @description This class uses another class in order to have access in an API.
-#' It is also create a Shiny application for air pollution. 
-#' @import shiny
+#' It is also create a Shiny application for air pollution.
 #' @import dplyr
 #' @import methods
 #' @export My_shiny

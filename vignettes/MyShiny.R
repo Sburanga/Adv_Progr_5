@@ -4,10 +4,17 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-## ---- fig.show='hold'----------------------------------------------------
-plot(1:10)
-plot(10:1)
+## ---- eval=FALSE---------------------------------------------------------
+#  devtools::install_github("sburanga/Adv_Progr_5")
+#  
 
-## ---- echo=FALSE, results='asis'-----------------------------------------
-knitr::kable(head(mtcars, 10))
+## ------------------------------------------------------------------------
+library(MyShiny)
+My_sunShiny<-My_shiny$new()
+
+
+## ----eval=F--------------------------------------------------------------
+#  
+#  My_sunShiny$run()
+#  
 

@@ -1,4 +1,3 @@
-library(jsonlite)
 #' Title Worldwide_Pollution
 #'
 #' @field responses list. The list of responses comming from API 
@@ -6,7 +5,6 @@ library(jsonlite)
 #' @field countries list. A list of the user's input
 #' @description This class creates one object which can give access in an API.The user can choose between four countries(Greece,Italy,Sweden,Turkey),
 #' and manipulate data for air pollution such as value pm5.
-#' @import jsonlite
 #' @import methods
 #' @export Worldwide_Pollution
 #' @exportClass Worldwide_Pollution 
