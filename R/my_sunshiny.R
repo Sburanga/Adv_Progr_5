@@ -17,6 +17,12 @@ My_shiny<-
   ),
   methods=list(
     initialize=function(){
+      countries = list(
+        "Turkey",
+        "Italy",
+        "Greece",
+        "Sweden"
+      )
       api <- MyShiny::Worldwide_Pollution$new(countries)
       server_components<<-list()
       server_components$ui <<- 
@@ -46,15 +52,6 @@ My_shiny<-
         Sys.setenv(
           'MAPBOX_TOKEN' = 
             'pk.eyJ1Ijoic3RldG84MjAiLCJhIjoiY2ptYm1hNGoxMDVzODNxcDh5YWYwdWIyeiJ9.vqmnBQELpRxT2klgrWJvuQ')
-        
-        countries = list(
-          "Turkey",
-          "Italy",
-          "Greece",
-          "Sweden"
-        )
-        
-        
         
         output$plot_1 = shiny::renderPlot({
           facets = c(
