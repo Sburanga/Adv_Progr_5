@@ -1,6 +1,7 @@
 library(shiny)
 library(dplyr)
 library(ggplot2)
+library(plotly)
 #' Title my_sunshine
 #'
 #' @field server_components list. It contains ui and server for the Shiny application.
@@ -9,6 +10,7 @@ library(ggplot2)
 #' @import shiny
 #' @import dplyr
 #' @import ggplot2
+#' @import plotly
 #' @export My_shiny
 #' @exportClass My_shiny
 My_shiny<-
