@@ -23,7 +23,7 @@ My_shiny<-
         "Sweden"
       )
       server_components<<-list()
-      server_components$api <<- MyShiny::Worldwide_Pollution$new(countries)
+      apii <- MyShiny::Worldwide_Pollution$new(countries)
       server_components$ui <<- 
         shiny::navbarPage("My Application",
            shiny::tabPanel("Component 1",
@@ -47,7 +47,7 @@ My_shiny<-
                                shiny::fluidRow(plotly::plotlyOutput("plot_2", height = "500px")))))))   
       
       server_components$server<<- function(input, output){
-        
+        api = apii
         Sys.setenv(
           'MAPBOX_TOKEN' = 
             'pk.eyJ1Ijoic3RldG84MjAiLCJhIjoiY2ptYm1hNGoxMDVzODNxcDh5YWYwdWIyeiJ9.vqmnBQELpRxT2klgrWJvuQ')
@@ -57,7 +57,7 @@ My_shiny<-
             "country",
             "value_pm5"
           )
-          plot_pm25_means(server_components$api$get_facets_all_responses(facets)) 
+          plot_pm25_means(api$get_facets_all_responses(facets)) 
         })
         
         output$plot_2 = plotly::renderPlotly({
@@ -69,7 +69,7 @@ My_shiny<-
             "data_location_latitude",
             "data_location_longitude")
           
-          df<-server_components$api$get_only_faced_data(server_components$api$responses[[input$radio]], facet_vector)
+          df<-api$get_only_faced_data(api$responses[[input$radio]], facet_vector)
           if(input$radio=="Italy") zoom <- 4.1
           else if(input$radio=="Sweden") zoom <- 3
           else zoom <- 5
