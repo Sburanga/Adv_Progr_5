@@ -12,8 +12,7 @@ My_shiny<-
   setRefClass(
   "My_shiny",
   fields = list(
-    server_components="list",
-    api = "Worldwide_Pollution"
+    server_components="list"
   ),
   methods=list(
     initialize=function(){
@@ -23,7 +22,7 @@ My_shiny<-
         "Greece",
         "Sweden"
       )
-      api <<- MyShiny::Worldwide_Pollution$new(countries)
+      server_components$api <<- MyShiny::Worldwide_Pollution$new(countries)
       server_components<<-list()
       server_components$ui <<- 
         shiny::navbarPage("My Application",
@@ -58,7 +57,7 @@ My_shiny<-
             "country",
             "value_pm5"
           )
-          plot_pm25_means(api$get_facets_all_responses(facets)) 
+          plot_pm25_means(server_components$api$get_facets_all_responses(facets)) 
         })
         
         output$plot_2 = plotly::renderPlotly({
@@ -70,7 +69,7 @@ My_shiny<-
             "data_location_latitude",
             "data_location_longitude")
           
-          df<-api$get_only_faced_data(api$responses[[input$radio]], facet_vector)
+          df<-server_components$api$get_only_faced_data(server_components$api$responses[[input$radio]], facet_vector)
           if(input$radio=="Italy") zoom <- 4.1
           else if(input$radio=="Sweden") zoom <- 3
           else zoom <- 5
