@@ -22,8 +22,8 @@ My_shiny<-
         "Greece",
         "Sweden"
       )
-      server_components$api <<- MyShiny::Worldwide_Pollution$new(countries)
       server_components<<-list()
+      server_components$api <<- MyShiny::Worldwide_Pollution$new(countries)
       server_components$ui <<- 
         shiny::navbarPage("My Application",
            shiny::tabPanel("Component 1",
