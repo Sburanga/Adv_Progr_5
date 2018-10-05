@@ -1,7 +1,5 @@
 library(shiny)
 library(dplyr)
-library(ggplot2)
-library(plotly)
 #' Title my_sunshine
 #'
 #' @field server_components list. It contains ui and server for the Shiny application.
@@ -67,7 +65,7 @@ My_shiny<-
           plot_pm25_means(api$get_facets_all_responses(facets)) 
         })
         
-        output$plot_2 = renderPlotly({
+        output$plot_2 = plotly::renderPlotly({
           facet_vector<-c(
             "country",
             "filename",
@@ -80,15 +78,15 @@ My_shiny<-
           if(input$radio=="Italy") zoom <- 4.1
           else if(input$radio=="Sweden") zoom <- 3
           else zoom <- 5
-          p<-plot_mapbox(mode = "scattermapbox") %>%
-            add_markers(
+          p <- plotly::plot_mapbox(mode = "scattermapbox") %>%
+            plotly::add_markers(
               data = df, y = ~data_location_latitude, x = ~data_location_longitude,
               color=~as.factor(`Category PM25`), text = ~filename, hoverinfo = "text",
               hovertext = paste('</br>Category: ', df$`Category PM25`, "</br>Region: ", df$filename,
                                 "</br>Value: ", df$value_pm5),
               marker=list(size=10), alpha = 0.5,
               colors = rev(RColorBrewer::brewer.pal(length(unique(df$`Category PM25`)),"PiYG"))) %>%
-            layout(
+            plotly::layout(
               plot_bgcolor = '#191A1A', paper_bgcolor = '#191A1A',
               mapbox = list(style = 'dark',
                             scope = "europe",
@@ -113,10 +111,10 @@ My_shiny<-
     mean_table = all_data %>%
       group_by(country) %>%
       summarise(mean=mean(value_pm5))
-    g = ggplot(mean_table, aes(x=country, y=mean)) +
-      geom_bar(position="dodge", stat="identity") +
-      labs(title = "Means of P5 in Countries", x="Countries", y="Mean") +
-      scale_y_continuous(breaks=seq(0,70,by=5))
+    g = ggplot2::ggplot(mean_table, aes(x=country, y=mean)) +
+      ggplot2::geom_bar(position="dodge", stat="identity") +
+      ggplot2::labs(title = "Means of P5 in Countries", x="Countries", y="Mean") +
+      ggplot2::scale_y_continuous(breaks=seq(0,70,by=5))
     return(g)
   }
       
