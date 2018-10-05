@@ -1,3 +1,6 @@
+library(shiny)
+library(dplyr)
+library(ggplot2)
 #' Title my_sunshine
 #'
 #' @field server_components list. It contains ui and server for the Shiny application.
@@ -6,6 +9,8 @@
 #' @import shiny
 #' @import dplyr
 #' @import ggplot2
+#' @export My_shiny
+#' @exportClass My_shiny
 My_shiny<-
    setRefClass(
   "My_shiny",
@@ -35,7 +40,7 @@ My_shiny<-
           "Greece",
           "Sweden"
         )
-        api=MyShiny::Worldwide_Polution$new(countries)
+        api<-Myshiny::Worldwide_Polution$new(countries)
         
         output$plot_1 = renderPlot({
           plot_pm25_means(api$get_facets_all_responses(facets)) 

@@ -1,0 +1,58 @@
+---
+title: "Vignette Title"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# To install:
+
+```{r , eval=FALSE}
+devtools::install_github("sburanga/Adv_Progr_5")
+```
+
+$~$
+
+# How to Use:
+
+First, you have to create an object.
+
+```{r }
+library(MyShiny)
+worldwide<-worldwide_Pollution$new(list("Sweden"))
+
+```
+
+##After that, we can use the functionalities above:
+For example,this function gives the value pm5 as an output:
+```{r}
+worldwide$get_only_faced_data(response = worldwide$responses$Sweden,facet_vector = "value_pm5")
+
+
+```
+
+or get all the data for a specific country:
+```{r}
+worldwide$get_country_data("Sweden")
+
+```
+
+
+
+
+
+
+
+
+

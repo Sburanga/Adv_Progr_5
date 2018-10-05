@@ -1,4 +1,0 @@
-library(testthat)
-library(My_Shiny)
-
-test_check("My_Shiny")
