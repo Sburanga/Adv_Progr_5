@@ -36,7 +36,8 @@ My_sunShiny<-My_shiny$new()
 ```
 
 After that you can run the Shiny application to see the functionalities of the application!
-```{r}
+
+```{r eval=F}
 
 My_sunShiny$run()
 
