@@ -43,7 +43,7 @@ Worldwide_Pollution =
       # country: string
       # facets: list that contains facets that you want
       get_country_data = function(country, facets=c()){
-        response = fromJSON(get_req_url(get_req_part(facets,"facet"), get_req_query("refine.country", country), get_req_query("rows", "10000")))
+        response = jsonlite::fromJSON(get_req_url(get_req_part(facets,"facet"), get_req_query("refine.country", country), get_req_query("rows", "10000")))
         return(response)
       },
       
@@ -54,7 +54,7 @@ Worldwide_Pollution =
         ress = list()
         for (country in countries) {
           cat(country, "request sent..." , sep = " ", "\n")
-          res = fromJSON(get_req_url(get_req_query("refine.country", country), get_req_query("rows", "10000")))
+          res = jsonlite::fromJSON(get_req_url(get_req_query("refine.country", country), get_req_query("rows", "10000")))
           ress[[country]]=res
           cat(country, "responded!" , sep = " ", "\n")
         }

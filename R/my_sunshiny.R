@@ -20,26 +20,26 @@ My_shiny<-
     initialize=function(){
       server_components<<-list()
       server_components$ui <<- 
-        navbarPage("My Application",
-           tabPanel("Component 1",
-                    plotOutput("plot_1")),
+        shiny::navbarPage("My Application",
+           shiny::tabPanel("Component 1",
+                    shiny::plotOutput("plot_1")),
            
-           tabPanel("Component 2",
-                    fluidPage(
+           shiny::tabPanel("Component 2",
+                    shiny::fluidPage(
                       
-                      titlePanel("Concentration of PM25"),
+                      shiny::titlePanel("Concentration of PM25"),
                       
-                      fluidRow(
-                        column(2,
-                               radioButtons(inputId = "radio", 
+                      shiny::fluidRow(
+                        shiny::column(2,
+                               shiny::radioButtons(inputId = "radio", 
                                             label = "Select the country you wish to visualize:", 
                                             choices = c("Turkey", "Italy", "Greece", "Sweden"), 
                                             inline = FALSE,
                                             width = NULL)
                         ),
-                        hr(),
-                        column(10, 
-                               fluidRow(plotlyOutput("plot_2", height = "500px")))))))   
+                        shiny::hr(),
+                        shiny::column(10, 
+                               shiny::fluidRow(plotly::plotlyOutput("plot_2", height = "500px")))))))   
       
       server_components$server<<- function(input, output){
         
@@ -56,7 +56,7 @@ My_shiny<-
         
         api <- MyShiny::Worldwide_Pollution$new(countries)
         
-        output$plot_1 = renderPlot({
+        output$plot_1 = shiny::renderPlot({
           facets = c(
             "country",
             "value_pm5"
@@ -104,7 +104,7 @@ My_shiny<-
       }
     },
   run=function(){
-    shinyApp(ui = server_components$ui, server = server_components$server)
+    shiny::shinyApp(ui = server_components$ui, server = server_components$server)
   },
   plot_pm25_means=function(all_data){
     mean_table = all_data %>%
