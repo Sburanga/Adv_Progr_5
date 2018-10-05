@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/Sburanga/Adv_Progr_5.svg?branch=master)](https://travis-ci.org/Sburanga/Adv_Progr_5)
