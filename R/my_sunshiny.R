@@ -40,7 +40,7 @@ My_shiny<-
           "Greece",
           "Sweden"
         )
-        api<-Myshiny::Worldwide_Polution$new(countries)
+        api <- MyShiny::Worldwide_Polution$new(countries)
         
         output$plot_1 = renderPlot({
           plot_pm25_means(api$get_facets_all_responses(facets)) 
