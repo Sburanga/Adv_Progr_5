@@ -108,7 +108,7 @@ My_shiny<-
     mean_table = all_data %>%
       group_by(country) %>%
       summarise(mean=mean(value_pm5))
-    g = ggplot2::ggplot(mean_table, aes(x=country, y=mean)) +
+    g = ggplot2::ggplot(mean_table, ggplot2::aes(x=country, y=mean)) +
       ggplot2::geom_bar(position="dodge", stat="identity") +
       ggplot2::labs(title = "Means of P5 in Countries", x="Countries", y="Mean") +
       ggplot2::scale_y_continuous(breaks=seq(0,70,by=5))
