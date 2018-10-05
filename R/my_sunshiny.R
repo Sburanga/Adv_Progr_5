@@ -13,7 +13,7 @@ My_shiny<-
   "My_shiny",
   fields = list(
     server_components="list",
-    api="Worldwide_Pollution"
+    api = "Worldwide_Pollution"
   ),
   methods=list(
     initialize=function(){
@@ -23,7 +23,7 @@ My_shiny<-
         "Greece",
         "Sweden"
       )
-      api <- MyShiny::Worldwide_Pollution$new(countries)
+      api <<- MyShiny::Worldwide_Pollution$new(countries)
       server_components<<-list()
       server_components$ui <<- 
         shiny::navbarPage("My Application",
