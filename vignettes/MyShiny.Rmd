@@ -31,7 +31,7 @@ First, you have to create an object.
 
 ```{r}
 library(MyShiny)
-My_sunShiny<-My_shiny$new()
+# My_sunShiny<-My_shiny$new()
 
 ```
 
@@ -39,7 +39,7 @@ After that you can run the Shiny application to see the functionalities of the a
 
 ```{r eval=F}
 
-My_sunShiny$run()
+# My_sunShiny$run()
 
 ```
 

@@ -12,10 +12,12 @@ My_shiny<-
   setRefClass(
   "My_shiny",
   fields = list(
-    server_components="list"
+    server_components="list",
+    api="Worldwide_Pollution"
   ),
   methods=list(
     initialize=function(){
+      api <- MyShiny::Worldwide_Pollution$new(countries)
       server_components<<-list()
       server_components$ui <<- 
         shiny::navbarPage("My Application",
@@ -52,7 +54,7 @@ My_shiny<-
           "Sweden"
         )
         
-        api <- MyShiny::Worldwide_Pollution$new(countries)
+        
         
         output$plot_1 = shiny::renderPlot({
           facets = c(
