@@ -7,8 +7,7 @@ library(dplyr)
 #' It is also create a Shiny application for air pollution. 
 #' @import shiny
 #' @import dplyr
-#' @import ggplot2
-#' @import plotly
+#' @import methods
 #' @export My_shiny
 #' @exportClass My_shiny
 My_shiny<-
