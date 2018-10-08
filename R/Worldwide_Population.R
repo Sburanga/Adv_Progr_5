@@ -18,8 +18,8 @@ Worldwide_Pollution =
     ),
     methods = list(
       initialize = function(country_list=list("Sweden")){
-        if(is.character(country_list)==TRUE)
-          stop("asdasd")
+        if(!is.list(country_list) | any(!unlist(lapply(country_list, is.character))))
+          stop("The input is not a list!")
         supported_countries = list(
           "Turkey",
           "Italy",
