@@ -25,7 +25,7 @@ My_shiny<-
       server_components<<-list()
       apii <- MyShiny::Worldwide_Pollution$new(countries)
       server_components$ui <<- 
-        shiny::navbarPage("My Application",
+        shiny::navbarPage("Air Pollution",
            shiny::tabPanel("Component 1",
                     shiny::plotOutput("plot_1")),
            
